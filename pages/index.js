@@ -4,11 +4,13 @@ import { useRouter } from 'next/router';
 export default function Home() {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setLoading(true);
 
         try {
             const res = await fetch('http://localhost:8000/verify-email', {
@@ -34,6 +36,8 @@ export default function Home() {
             }
         } catch (err) {
             setError('Connection error. Is backend running?');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -75,9 +79,18 @@ export default function Home() {
                         </div>
                         <button
                             type="submit"
-                            className="w-full py-4 px-6 border border-transparent rounded-xl shadow-lg text-lg font-bold text-white uppercase tracking-wider transform transition-all duration-200 hover:-translate-y-1 hover:shadow-xl bg-gradient-to-r from-[#00685E] to-[#004d46] hover:from-[#F26C22] hover:to-[#d95a12] focus:outline-none"
+                            disabled={loading}
+                            className={`w-full py-4 px-6 border border-transparent rounded-xl shadow-lg text-lg font-bold text-white uppercase tracking-wider transform transition-all duration-200 hover:-translate-y-1 hover:shadow-xl focus:outline-none ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-[#00685E] to-[#004d46] hover:from-[#F26C22] hover:to-[#d95a12]'}`}
                         >
-                            Verify & Continue
+                            {loading ? (
+                                <span className="flex items-center justify-center">
+                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Verifying...
+                                </span>
+                            ) : 'Verify & Continue'}
                         </button>
                     </form>
                 </div>
