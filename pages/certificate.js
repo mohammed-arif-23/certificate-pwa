@@ -18,7 +18,7 @@ export default function Certificate() {
             // Auto-trigger email ONLY if coming from feedback (new submission)
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('new') === 'true') {
-                fetch('http://localhost:8000/send-certificate', {
+                fetch('https://certificate-pwa-backend.onrender.com/send-certificate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: storedEmail }),
@@ -35,7 +35,7 @@ export default function Certificate() {
 
         try {
             // logic similar to feedback page
-            const resVal = await fetch('http://localhost:8000/generate-certificate', {
+            const resVal = await fetch('https://certificate-pwa-backend.onrender.com/generate-certificate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),

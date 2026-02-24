@@ -40,7 +40,7 @@ export default function Feedback() {
 
         try {
             // 1. Submit to Supabase
-            const res = await fetch('http://localhost:8000/feedback', {
+            const res = await fetch('https://certificate-pwa-backend.onrender.com/feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
