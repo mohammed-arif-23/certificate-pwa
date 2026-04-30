@@ -24,7 +24,7 @@ export default function AdminDashboard() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('https://certificate-pwa-backend.onrender.com/admin/login', {
+            const res = await fetch('http://localhost:8000/admin/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
@@ -43,8 +43,8 @@ export default function AdminDashboard() {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const statsRes = await fetch('https://certificate-pwa-backend.onrender.com/admin/stats');
-            const dataRes = await fetch('https://certificate-pwa-backend.onrender.com/admin/feedback');
+            const statsRes = await fetch('http://localhost:8000/admin/stats');
+            const dataRes = await fetch('http://localhost:8000/admin/feedback');
 
             if (statsRes.ok) setStats(await statsRes.json());
             if (dataRes.ok) setFeedbackList(await dataRes.json());
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
         if (!confirm(`Are you sure you want to delete feedback from ${email}?`)) return;
 
         try {
-            const res = await fetch(`https://certificate-pwa-backend.onrender.com/admin/feedback/${email}`, {
+            const res = await fetch(`http://localhost:8000/admin/feedback/${email}`, {
                 method: 'DELETE',
             });
             if (res.ok) {
@@ -114,7 +114,7 @@ export default function AdminDashboard() {
     return (
         <div className="min-h-screen bg-gray-50 font-sans">
             <Head>
-                <title>Admin Dashboard - Valli Hospital</title>
+                <title>Admin Dashboard - Iyakkam</title>
             </Head>
 
             {/* Header */}

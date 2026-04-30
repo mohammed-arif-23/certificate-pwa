@@ -40,7 +40,7 @@ export default function Feedback() {
 
         try {
             // 1. Submit to Supabase
-            const res = await fetch('https://certificate-pwa-backend.onrender.com/feedback', {
+            const res = await fetch('http://localhost:8000/feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -96,7 +96,7 @@ export default function Feedback() {
                 {/* Content Section */}
                 <div className="p-8 sm:p-10">
                     <div className="mb-8 text-center">
-                        <h2 className="text-3xl font-bold text-[#00685E]">CME Program Feedback</h2>
+                        <h2 className="text-3xl font-bold text-[#00685E]">Iyakkam CME Program Feedback</h2>
                         <p className="mt-2 text-gray-500">We value your input to improve our future programs.</p>
                     </div>
 
@@ -149,7 +149,7 @@ export default function Feedback() {
             </div>
 
             <div className="mt-8 text-center text-gray-400 text-sm">
-                &copy; {new Date().getFullYear()} Valli Super Speciality Hospital. All rights reserved.
+                &copy; {new Date().getFullYear()} Iyakkam - Valli Super Speciality Hospital. All rights reserved.
             </div>
         </div>
     );

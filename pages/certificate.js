@@ -18,7 +18,7 @@ export default function Certificate() {
             // Auto-trigger email ONLY if coming from feedback (new submission)
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('new') === 'true') {
-                fetch('https://certificate-pwa-backend.onrender.com/send-certificate', {
+                fetch('http://localhost:8000/send-certificate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: storedEmail }),
@@ -35,7 +35,7 @@ export default function Certificate() {
 
         try {
             // logic similar to feedback page
-            const resVal = await fetch('https://certificate-pwa-backend.onrender.com/generate-certificate', {
+            const resVal = await fetch('http://localhost:8000/generate-certificate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
@@ -43,6 +43,15 @@ export default function Certificate() {
 
             if (resVal.ok) {
                 const blob = await resVal.blob();
+                
+                // Safety check: ensure it's actually a PDF
+                if (blob.type !== 'application/pdf') {
+                    const text = await blob.text();
+                    console.error("Not a PDF. Received:", text);
+                    alert("Error: Server did not return a valid PDF file. Please contact support.");
+                    return;
+                }
+
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
@@ -51,7 +60,13 @@ export default function Certificate() {
                 a.click();
                 a.remove();
                 window.URL.revokeObjectURL(url);
+            } else {
+                const errorData = await resVal.json().catch(() => ({ detail: "Unknown error" }));
+                alert(`Download failed: ${errorData.detail}`);
             }
+        } catch (err) {
+            console.error("Download Error:", err);
+            alert("Connection error occurred while downloading.");
         } finally {
             setLoading(false);
         }
@@ -109,7 +124,7 @@ export default function Certificate() {
             </div>
 
             <div className="fixed bottom-4 text-center text-gray-400 text-xs">
-                &copy; {new Date().getFullYear()} Valli Super Speciality Hospital
+                &copy; {new Date().getFullYear()} Iyakkam - Valli Super Speciality Hospital
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ export default function Home() {
         setLoading(true);
 
         try {
-            const res = await fetch('https://certificate-pwa-backend.onrender.com/verify-email', {
+            const res = await fetch('http://localhost:8000/verify-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
@@ -55,7 +55,7 @@ export default function Home() {
                 </div>
 
                 <div className="p-8 sm:p-10">
-                    <h1 className="text-3xl font-bold mb-2 text-center text-[#00685E]">Welcome</h1>
+                    <h1 className="text-3xl font-bold mb-2 text-center text-[#00685E]">Welcome to Iyakkam</h1>
                     <p className="text-center text-gray-500 mb-8">Enter your email to verify your attendance.</p>
 
                     {error && (
@@ -97,7 +97,7 @@ export default function Home() {
             </div>
 
             <div className="fixed bottom-4 text-center text-gray-400 text-xs">
-                &copy; {new Date().getFullYear()} Valli Super Speciality Hospital
+                &copy; {new Date().getFullYear()} Iyakkam - Valli Super Speciality Hospital
             </div>
         </div>
     );
