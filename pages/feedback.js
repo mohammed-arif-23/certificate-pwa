@@ -102,27 +102,27 @@ export default function Feedback() {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <StarRating
-                            label="1. How relevant was the course content (Triage, Surveys, Airway, Circulation) to your daily clinical practice?"
+                            label="1. How would you rate your overall learning experience at the \"Iyakkam Unstable shoulder\" session?"
                             value={q1}
                             onChange={setQ1}
                         />
                         <StarRating
-                            label="2. To what extent has this training improved your confidence in performing immediate interventions like BLS and ACLS?"
+                            label="2. How applicable are the modern rehab concepts discussed today to your daily clinical practice?"
                             value={q2}
                             onChange={setQ2}
                         />
                         <StarRating
-                            label="3. How effective were the instructors in demonstrating practical skills and clarifying doubts?"
+                            label="3. Were the explanations and demonstrations of the shoulder rehab techniques clear and easy to follow?"
                             value={q3}
                             onChange={setQ3}
                         />
                         <StarRating
-                            label="4. Was the four-hour duration sufficient to cover the course highlights effectively?"
+                            label="4. After attending this session, how confident do you feel in applying the new rehab concepts discussed today?"
                             value={q4}
                             onChange={setQ4}
                         />
                         <StarRating
-                            label="5. Overall, how satisfied are you with the program, and would you recommend it?"
+                            label="5. How likely are you to attend future events or recommend our sessions to a colleague?"
                             value={q5}
                             onChange={setQ5}
                         />
