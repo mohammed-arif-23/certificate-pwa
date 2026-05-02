@@ -102,7 +102,7 @@ export default function Feedback() {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <StarRating
-                            label="1. How would you rate your overall learning experience at the \"Iyakkam Unstable shoulder\" session?"
+                            label="1. How would you rate your overall learning experience at the Iyakkam Unstable shoulder session?"
                             value={q1}
                             onChange={setQ1}
                         />
